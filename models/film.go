@@ -6,7 +6,7 @@ type Film struct {
 	ThumbnailFilm string             `json:"thumbnailfilm" form:"image" gorm:"type: varchar(255)"`
 	Year          string             `json:"year" gorm:"type: varchar(255)" form:"year"`
 	CategoryID    int                `json:"category_id" form:"category_id" gorm:"type:int"`
-	Category      CategoriesResponse `json:"category"`
+	Category      CategoriesResponse `json:"category" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Description   string             `json:"description"  gorm:"type: text" form:"description"`
 	LinkFilm      string             `json:"linkfilm"  gorm:"type: text" form:"linkfilm"`
 }
@@ -20,7 +20,6 @@ type FilmResponse struct {
 	Category      CategoriesResponse `json:"category"`
 	Description   string             `json:"description"`
 	LinkFilm      string             `json:"linkfilm"`
-
 }
 
 type FilmEpisodeResponse struct {
@@ -31,7 +30,6 @@ type FilmEpisodeResponse struct {
 	CategoryID    int                `json:"category_id"`
 	Category      CategoriesResponse `json:"category"`
 	LinkFilm      string             `json:"linkfilm"`
-
 }
 
 type FilmCategoryResponse struct {
@@ -43,7 +41,6 @@ type FilmCategoryResponse struct {
 	Category      CategoriesResponse `json:"category"`
 	Description   string             `json:"description"`
 	LinkFilm      string             `json:"linkfilm"`
-
 }
 
 func (FilmCategoryResponse) TableName() string {
